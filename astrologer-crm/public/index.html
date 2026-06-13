@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astrologer CRM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <h2>Astrologer CRM</h2>
+      <button class="nav-btn active" id="dashboard-btn" onclick="switchView(event, 'dashboard')">Dashboard</button>
+      <button class="nav-btn" onclick="switchView(event, 'clients')">Clients</button>
+      <button class="nav-btn" onclick="switchView(event, 'appointments')">Appointments</button>
+      <button id="theme-toggle" onclick="toggleDarkMode()">Toggle Theme</button>
+    </aside>
+
+    <main class="content">
+      <section id="dashboard-view" class="view active">
+        <h1>Dashboard</h1>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Clients</h3>
+            <p id="stat-clients">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Upcoming Appointments</h3>
+            <p id="stat-appointments">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Completed Consultations</h3>
+            <p id="stat-consultations">0</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="clients-view" class="view">
+        <div class="header-bar">
+          <h1>Clients</h1>
+          <button class="btn-primary" onclick="openClientModal()">Add Client</button>
+        </div>
+        <input id="search-input" class="search-box" type="text" placeholder="Search clients" oninput="searchClients()" />
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Birth Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="clients-table-body"></tbody>
+        </table>
+      </section>
+
+      <section id="appointments-view" class="view">
+        <div class="header-bar">
+          <h1>Appointments</h1>
+          <button class="btn-primary" onclick="openApptModal()">New Appointment</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appts-table-body"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="client-modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeClientModal()">&times;</span>
+      <h2 id="client-modal-title">Add Client</h2>
+      <input id="client-id" type="hidden" />
+      <input id="client-name" type="text" placeholder="Name" />
+      <input id="client-phone" type="text" placeholder="Phone" />
+      <input id="client-email" type="email" placeholder="Email" />
+      <input id="client-dob" type="date" placeholder="Birth Date" />
+      <button class="btn-primary" onclick="saveClient()">Save Client</button>
+    </div>
+  </div>
+
+  <div class="modal" id="appt-modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeApptModal()">&times;</span>
+      <h2>New Appointment</h2>
+      <select id="appt-client"></select>
+      <input id="appt-date" type="date" />
+      <input id="appt-time" type="time" />
+      <button class="btn-primary" onclick="saveAppt()">Save Appointment</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
